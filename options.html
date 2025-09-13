@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark">
+    <title>下班提醒 – 設定</title>
+    <link rel="stylesheet" href="css/options.css" />
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">下班提醒 – 設定</h1>
+            <p class="page-subtitle">自訂提醒時間與頻率，讓自己準時收工。</p>
+        </header>
+
+        <!-- 基本設定 -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title">基本</h2>
+                <p class="card-description">啟用提醒、時間與間隔設定</p>
+            </div>
+            <div class="card-content">
+                <div class="grid-2">
+                    <label class="form-control-inline" for="enabled">
+                        <input type="checkbox" id="enabled" class="checkbox" />
+                        <span class="label-text">啟用提醒</span>
+                    </label>
+                    <label class="form-control-inline" for="skipTaiwanHolidays">
+                        <input type="checkbox" id="skipTaiwanHolidays" class="checkbox" />
+                        <span class="label-text">台灣國定假日不提醒</span>
+                    </label>
+                </div>
+                <div class="grid-2">
+                    <label class="form-control">
+                        <span class="label-text">開始時間</span>
+                        <input type="time" id="startTime" class="input" />
+                    </label>
+
+                    <label class="form-control">
+                        <span class="label-text">提醒間隔（分鐘）</span>
+                        <input type="number" id="interval" min="1" step="1" class="input" />
+                    </label>
+                </div>
+
+                <div class="grid-2">
+                    <label class="form-control">
+                        <span class="label-text">最晚提醒時間</span>
+                        <input type="time" id="latestTime" class="input" />
+                        <span class="form-hint">超過此時間不再提醒</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- 提醒日 -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title">提醒日</h2>
+                <p class="card-description">預設週一至週五，亦可自訂</p>
+            </div>
+            <div class="card-content">
+                <div id="days" class="days-grid"><!-- options.js 會填入 checkbox --></div>
+            </div>
+        </section>
+
+        <!-- 動作 -->
+        <section class="actions">
+            <button id="save" class="btn btn-primary">儲存</button>
+            <button id="skipToday" class="btn btn-outline">今天先不要提醒</button>
+            <span id="status" class="muted"></span>
+        </section>
+    </main>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

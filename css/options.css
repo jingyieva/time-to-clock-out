@@ -1,0 +1,307 @@
+/* ===== shadcn-ish design tokens ===== */
+:root {
+    --bg: #0b0b0c;
+    /* page background (dark pleasant) */
+    --bg-hover: #13141a;
+    --card: #111113;
+    /* card background */
+    --card-contrast: #17171a;
+    --border: #26262b;
+    --ring: #7c9cff;
+    --text: #e5e7eb;
+    --text-muted: #a1a1aa;
+
+    --primary: #3b82f6;
+    /* blue-500 */
+    --primary-foreground: #0b1220;
+    --outline: #303038;
+
+    --radius: 14px;
+    --shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+
+    color-scheme: light dark;
+}
+
+/* --- light mode override --- */
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #f8fafc;
+        --bg-hover: #bebec1;
+        --card: #ffffff;
+        --card-contrast: #f4f4f5;
+        --border: #e4e4e7;
+        --ring: #1d4ed8;
+        --text: #0f172a;
+        --text-muted: #6b7280;
+
+        --primary: #1d4ed8;
+        --primary-foreground: #eff6ff;
+
+        color-scheme: light dark;
+        /* 照樣保留，讓控制元件能切換 */
+    }
+}
+
+/* ===== base ===== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Arial, "Apple Color Emoji";
+    color: var(--text);
+    background: radial-gradient(1200px 600px at 20% -10%, #1d2436, transparent 50%),
+        radial-gradient(900px 500px at 120% 0%, #111827, transparent 55%),
+        var(--bg);
+}
+
+/* ===== layout ===== */
+.container {
+    max-width: 860px;
+    margin: 40px auto 64px;
+    padding: 0 20px;
+}
+
+.page-header {
+    margin-bottom: 18px;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.page-subtitle {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* ===== card (shadcn/ui Card) ===== */
+.card {
+    background: linear-gradient(180deg, var(--card), var(--card-contrast));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-top: 18px;
+}
+
+.card-header {
+    padding: 14px 16px 6px;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.card-description {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.card-content {
+    padding: 14px 16px 16px;
+}
+
+/* ===== forms ===== */
+.form-control {
+    display: grid;
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.form-control-inline {
+    display: inline;
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.label-text {
+    font-size: 13px;
+    color: var(--text);
+}
+
+.form-hint {
+    align-self: end;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* grid helpers */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media (max-width: 640px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* inputs */
+.input {
+    width: 100%;
+    appearance: none;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.input:focus-visible {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 20%, transparent);
+    background: #0c0c10;
+}
+
+
+/* checkbox (shadcn/ui checkbox-like) */
+.checkbox {
+    width: 16px;
+    height: 16px;
+    appearance: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    position: relative;
+    margin-right: 8px;
+    vertical-align: middle;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+}
+
+.checkbox:focus-visible {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 20%, transparent);
+}
+
+.checkbox:checked {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.checkbox:checked::after {
+    content: "";
+    position: absolute;
+    inset: 3px 5px 5px 3px;
+    /* 小勾勾 */
+    border-right: 2px solid var(--primary-foreground);
+    border-bottom: 2px solid var(--primary-foreground);
+    transform: rotate(45deg);
+}
+
+/* days grid (週一～週日) */
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.days-grid label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 10px 8px;
+    border-radius: 10px;
+    user-select: none;
+    transition: background .15s, border-color .15s, transform .06s;
+}
+
+.days-grid label:hover {
+    background: var(--bg-hover);
+}
+
+.days-grid input[type="checkbox"] {
+    margin: 0;
+}
+
+.days-grid input[type="checkbox"]:checked+span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* actions */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+/* buttons (shadcn Button: primary / outline) */
+.btn {
+    appearance: none;
+    border: 1px solid var(--outline);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    background: #111217;
+    color: var(--text);
+    cursor: pointer;
+    transition: transform .06s ease, background .15s, border-color .15s, box-shadow .15s;
+}
+
+.btn:hover {
+    background: var(--bg-hover);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 20%, transparent);
+    border-color: var(--ring);
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: color-mix(in oklab, var(--primary) 70%, black);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: color-mix(in oklab, var(--primary) 85%, white);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+.btn-outline {
+    background: transparent;
+    border-color: var(--border);
+}
+
+.btn-outline:hover {
+    background: var(--bg-hover);
+}
+
+/* misc */
+.muted {
+    color: var(--text-muted);
+    font-size: 12px;
+}
