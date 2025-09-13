@@ -68,7 +68,7 @@ time-to-clock-out/
     chrome://extensions/
     ```
 3. 開啟右上角 開發人員模式。
-4. 點選 載入未封裝項目，選擇 work-reminder/ 專案資料夾。
+4. 點選 載入未封裝項目，選擇 time-to-clock-out/ 專案資料夾。
 5. 安裝完成後，您會看到綠色小鐘圖示。點擊即可進入設定頁。
 
 ---
