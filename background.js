@@ -1,17 +1,7 @@
-// 預設設定值
-const DEFAULTS = {
-    enabled: true,
-    startHour: 17,       // 17:00 後才提醒
-    startMinute: 0,
-    intervalMinutes: 15, // 每 15 分鐘
-    days: [1, 2, 3, 4, 5],
-    latestHour: 23,
-    latestMinute: 0,
-    lastNotifiedAt: 0,
-    skipToday: false,
-    lastSkipDate: '',
-    skipTaiwanHoliday: true,
-};
+import {
+    DEFAULTS, ymd, isAfterTime, isBeforeOrEqualTime, notify,
+} from './common.js';
+
 
 let HOLIDAYS = {};
 let HOLIDAYS_YEAR = null;
@@ -30,19 +20,6 @@ async function setSettings(patch) {
 function inDays(days, jsDay) {
     const dayNum = jsDay === 0 ? 7 : jsDay;
     return days.includes(dayNum);
-}
-
-function isAfterTime(now, hour, minute) {
-    return now.getHours() > hour || (now.getHours() === hour && now.getMinutes() >= minute);
-}
-
-function isBeforeOrEqualTime(now, hour, minute) {
-    return now.getHours() < hour || (now.getHours() === hour && now.getMinutes() <= minute);
-}
-
-function ymd(d) {
-    const y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, '0'), dd = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${dd}`;
 }
 
 // 台灣假日 API（行政院人事行政總處提供 JSON 格式）
@@ -100,13 +77,11 @@ async function maybeNotify(immediate = false) {
         if (!due) return;
 
         const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        chrome.notifications.create('', {
-            type: 'basic',
-            iconUrl: 'icons/icon128.png',
+
+        notify({
             title: '差不多要下班囉！🤩',
             message: `現在 ${timeStr}，記得收尾、收書包、備份、打卡、去尿尿或關機～`,
-            priority: 2
-        });
+        })
 
         console.log(`[Time to Clock out!]: ${timeStr}! Ready to leave the office! Collect your stuff and RUN !!!`)
 

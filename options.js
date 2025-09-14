@@ -1,19 +1,6 @@
-const DEFAULTS = {
-    enabled: true,
-    startHour: 17,
-    startMinute: 0,
-    intervalMinutes: 15,
-    days: [1, 2, 3, 4, 5],
-    latestHour: 23,
-    latestMinute: 59,
-    skipToday: false,
-    lastSkipDate: ''
-};
-
-function ymd(d) {
-    const y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, '0'), dd = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${dd}`;
-}
+import {
+    DEFAULTS, ymd, notify,
+} from './common.js';
 
 function hmsToTimeInput(h, m) {
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
@@ -30,17 +17,6 @@ function updateSkipButtonUI(s) {
     const today = ymd(new Date());
     const isSkippedToday = s.skipToday && s.lastSkipDate === today;
     btn.textContent = isSkippedToday ? '今天還是提醒一下吧' : '今天先不要提醒';
-}
-
-// 顯示系統通知（Options 頁可直接呼叫）
-function notify({ message, title = '你的下班提醒好朋友' }) {
-    chrome.notifications.create('', {
-        type: 'basic',
-        iconUrl: 'icons/icon128.png',
-        title: title,
-        message,
-        priority: 2
-    });
 }
 
 async function loadSettings() {

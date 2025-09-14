@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "你的下班提醒好朋友",
+  "name": "您的下班提醒好朋友",
   "version": "0.2.0",
-  "description": "超過設定的下班時間後，每隔一段時間提醒你收工。",
+  "description": "Your boss won’t tell you to go home, but I will.",
   "permissions": ["notifications", "alarms", "storage", "idle"],
   "host_permissions": ["https://cdn.jsdelivr.net/*"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "options_page": "options.html",
   "icons": {

@@ -169,7 +169,7 @@ body {
 .input:focus-visible {
     border-color: var(--ring);
     box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 20%, transparent);
-    background: #0c0c10;
+    background: var(--bg);
 }
 
 

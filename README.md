@@ -1,4 +1,4 @@
-# 您的下班提醒好朋友 （Time To Clock out）
+# 您的下班提醒好朋友 （Time To Clock Out）
 
 <img src="./icons/icon128.png" width="300" height="300">
 
@@ -31,6 +31,7 @@
 ```arduino
 time-to-clock-out/
 ├─ manifest.json        // Chrome Extension 配置
+├─ common.js            // 共用邏輯
 ├─ background.js        // 背景邏輯：計時、通知、假日判斷
 ├─ options.html         // 設定頁
 ├─ options.js           // 設定頁邏輯
@@ -67,15 +68,15 @@ time-to-clock-out/
     ```
     chrome://extensions/
     ```
-3. 開啟右上角 開發人員模式。
+3. 開啟右上角「開發人員模式」。
 4. 點選 載入未封裝項目，選擇 time-to-clock-out/ 專案資料夾。
-5. 安裝完成後，您會看到綠色小鐘圖示。點擊即可進入設定頁。
+5. 安裝完成後，您會看到如上方圖片的小圖示。點擊即可進入設定頁。
 
 ---
 
 ## 🔒 隱私聲明
 
-Time To Clock out 不會蒐集任何個人資料，所有設定都僅儲存在您的瀏覽器中。
+Time To Clock Out 不會蒐集任何個人資料，所有設定都僅儲存在您的瀏覽器中。
 
 ---
 
